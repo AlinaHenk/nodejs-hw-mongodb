@@ -12,7 +12,6 @@ export const initMongoDB = async () => {
     await mongoose.connect(DB_HOST);
     console.log('Mongodb connection successfully');
   } catch (error) {
-    console.log('MONGODB_USER', env('MONGODB_USER'));
     console.log('Mongodb connection error', error.message);
     throw error;
   }

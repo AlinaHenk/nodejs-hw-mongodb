@@ -21,13 +21,13 @@ const contactSchema = new Schema(
     contactType: {
       type: String,
       enum: ['work', 'home', 'personal'],
+      default: 'personal',
+      required: true,
     },
   },
   { versionKey: false, timestamps: true },
 );
 
 const ContactCollection = model('contact', contactSchema);
-// category => categories
-// mouse => mice
 
 export default ContactCollection;
