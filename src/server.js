@@ -22,14 +22,8 @@ export const startServer = () => {
 
   app.use('/contacts', contactsRouter);
 
-  app.use(errorHandler);
   app.use(notFoundHandler);
-
-  // app.use((req, res) => {
-  //   res.status(404).json({
-  //     message: 'Contact not found',
-  //   });
-  // });
+  app.use(errorHandler);
 
   const port = Number(env('PORT', 3000));
 
