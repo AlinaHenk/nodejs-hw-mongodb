@@ -7,14 +7,10 @@ import contactsRouter from './routers/contacts.js';
 
 import errorHandler from './middlewares/errorHandler.js';
 import notFoundHandler from './middlewares/notFoundHandler.js';
+import logger from './middlewares/logger.js';
 
 export const startServer = () => {
   const app = express();
-  const logger = pino({
-    transport: {
-      target: 'pino-pretty',
-    },
-  });
 
   app.use(logger);
   app.use(cors());
