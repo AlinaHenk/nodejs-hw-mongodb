@@ -28,3 +28,11 @@ export const signinController = async (req, res) => {
     },
   });
 };
+
+export const refreshController = async (req, res) => {
+  const { refreshToken, sessionId } = req.cookies;
+  const session = await authServices.refreshSession({
+    refreshToken,
+    sessionId,
+  });
+};

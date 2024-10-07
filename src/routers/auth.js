@@ -19,10 +19,6 @@ authRouter.post(
   ctrlWrapper(authControllers.signinController),
 );
 
-// authRouter.post(
-//   '/refresh',
-//   validateBody(userSignInShema),
-//   ctrlWrapper(authControllers.signinController),
-// );
+authRouter.post('/refresh', ctrlWrapper(authControllers.refreshController));
 
 export default authRouter;
