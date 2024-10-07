@@ -7,4 +7,7 @@ export const userSignUpShema = Joi.object({
   password: Joi.string().min(4).required(),
 });
 
-// password - обов’язково (памʼятайте, що пароль має бути захешованим за допомогою бібліотеки bcrypt)
+export const userSignInShema = Joi.object({
+  email: Joi.string().pattern(emailRegexp).required(),
+  password: Joi.string().min(4).required(),
+});
