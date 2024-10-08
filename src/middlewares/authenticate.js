@@ -3,7 +3,6 @@ import * as authServices from '../services/auth.js';
 
 const authenticate = async (req, res, next) => {
   const { authorization } = req.headers;
-  // const authorization = req.get('Authorization');
 
   if (!authorization) {
     return next(createHttpError(401, 'Authorization header not found'));

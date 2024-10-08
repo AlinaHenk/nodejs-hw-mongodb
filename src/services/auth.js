@@ -14,6 +14,12 @@ const createSession = () => {
   const refreshToken = randomBytes(30).toString('base64');
   const accessTokenValidUntil = new Date(Date.now() + accessTokenLifetime);
   const refreshTokenValidUntil = new Date(Date.now() + refreshTokenLifetime);
+  return {
+    accessToken,
+    refreshToken,
+    accessTokenValidUntil,
+    refreshTokenValidUntil,
+  };
 };
 
 export const signup = async (payload) => {
@@ -82,6 +88,10 @@ export const refreshSession = async ({ refreshToken, sessionId }) => {
   });
 
   return userSession;
+};
+
+export const signout = async (sessionId) => {
+  await SessionCollection.deleteOne({ _id: sessionId });
 };
 
 export const findUser = (filter) => UserCollection.findOne(filter);
