@@ -11,6 +11,15 @@ const setupSession = (res, session) => {
   });
 };
 
+const clearSession = async (req, res) => {
+  const { sessionId } = req.cookies;
+  if (sessionId) {
+    await authServices.signout(sessionId);
+    res.clearCookie('sessionId');
+    res.clearCookie('refreshToken');
+  }
+};
+
 export const signupController = async (req, res) => {
   const newUser = await authServices.signup(req.body);
   res.status(201).json({
@@ -50,14 +59,8 @@ export const refreshController = async (req, res) => {
 };
 
 export const signoutController = async (req, res) => {
-  const { sessionId } = req.cookies;
-  if (sessionId) {
-    await authServices.signout(sessionId);
-    res.clearCookie('sessionId');
-    res.clearCookie('refreshToken');
-
-    res.status(204).send();
-  }
+  await clearSession(req, res);
+  res.status(204).send();
 };
 
 export const requestResetEmailController = async (req, res) => {
@@ -71,6 +74,7 @@ export const requestResetEmailController = async (req, res) => {
 
 export const resetPasswordController = async (req, res) => {
   await authServices.resetPassword(req.body);
+  await clearSession(req, res);
   res.json({
     message: 'Password has been successfully reset.',
     status: 200,
