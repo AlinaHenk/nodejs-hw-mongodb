@@ -9,6 +9,7 @@ import authRouter from './routers/auth.js';
 import errorHandler from './middlewares/errorHandler.js';
 import notFoundHandler from './middlewares/notFoundHandler.js';
 import logger from './middlewares/logger.js';
+import { UPLOAD_DIR } from './constants/index.js';
 
 export const startServer = () => {
   const app = express();
@@ -20,6 +21,7 @@ export const startServer = () => {
 
   app.use('/auth', authRouter);
   app.use('/contacts', contactsRouter);
+  app.use('/uploads', express.static(UPLOAD_DIR));
 
   app.use(notFoundHandler);
   app.use(errorHandler);
